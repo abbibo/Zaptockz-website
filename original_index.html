@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<title>Zaptockz — Revolutionizing College Admissions</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--navy:#0F2044;--navy2:#1a3260;--accent:#F97316;--accent2:#ea6a08;--light:#F8FAFC;--border:#e2e8f0;--text:#1e293b;--muted:#64748b;--white:#fff;--green:#16a34a;--red:#dc2626;--radius:10px;--radius-lg:14px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;color:var(--text);background:var(--white);line-height:1.5;overflow-x:hidden}
+img{max-width:100%;display:block}
+button,input,select,textarea{font-family:inherit}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:200;background:var(--navy)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px}
+.logo{font-size:20px;font-weight:700;color:#fff;cursor:pointer;letter-spacing:-0.3px;flex-shrink:0}
+.logo span{color:var(--accent)}
+.nav-desktop{display:none;gap:2px;align-items:center}
+.nav-desktop a{color:rgba(255,255,255,.8);font-size:13px;padding:6px 9px;border-radius:6px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.nav-desktop a:hover,.nav-desktop a.active{color:#fff;background:rgba(255,255,255,.12)}
+.nav-cta{background:var(--accent)!important;color:#fff!important;font-weight:600;padding:7px 12px!important}
+.nav-cta:hover{background:var(--accent2)!important}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:none}
+.hamburger span{display:block;width:22px;height:2px;background:rgba(255,255,255,.85);border-radius:2px;transition:all .25s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* mobile drawer */
+.drawer{display:none;position:fixed;inset:56px 0 0 0;background:var(--navy);z-index:199;overflow-y:auto;padding:8px 0 24px}
+.drawer.open{display:block}
+.drawer a{display:block;color:rgba(255,255,255,.85);font-size:15px;padding:13px 20px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.06);transition:background .15s}
+.drawer a:hover{background:rgba(255,255,255,.07)}
+.drawer .drawer-cta{background:var(--accent);color:#fff;font-weight:600;border-radius:8px;margin:14px 16px;text-align:center}
+
+/* ── TICKER ── */
+.ticker{background:var(--accent);color:#fff;font-size:12px;overflow:hidden;white-space:nowrap;padding:7px 0}
+.ticker-track{display:inline-block;animation:tick 28s linear infinite;will-change:transform}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── PAGES ── */
+.page{display:none}.page.active{display:block}
+
+/* ── SECTIONS ── */
+section{padding:52px 16px}
+@media(min-width:600px){section{padding:64px 5%}}
+@media(min-width:960px){section{padding:72px 6%}}
+.tag{display:inline-block;background:#fff3e8;color:var(--accent);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.h1{font-size:clamp(26px,5vw,46px);font-weight:700;color:var(--navy);line-height:1.2}
+.h2{font-size:clamp(22px,3.5vw,34px);font-weight:700;color:var(--navy);line-height:1.25}
+.sub{font-size:15px;color:var(--muted);margin-top:10px;line-height:1.7;max-width:560px}
+.center{text-align:center}.center .sub{margin-left:auto;margin-right:auto}
+
+/* ── HERO ── */
+.hero{background:var(--navy);padding:52px 16px 44px;text-align:center}
+@media(min-width:600px){.hero{padding:70px 5%}}
+.hero h1{font-size:clamp(24px,5vw,46px);font-weight:700;color:#fff;line-height:1.2;max-width:700px;margin:0 auto 14px}
+.hero h1 span{color:var(--accent)}
+.hero p{font-size:clamp(15px,2vw,17px);color:rgba(255,255,255,.75);max-width:500px;margin:0 auto 28px;line-height:1.65}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-align:center;min-height:44px}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent2)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4)}.btn-outline:hover{border-color:#fff}
+.trust-strip{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.trust-item{color:rgba(255,255,255,.6);font-size:12px;display:flex;align-items:center;gap:6px}
+.tdot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* ── STATS ── */
+.stats-row{display:grid;grid-template-columns:repeat(2,1fr);border-bottom:1px solid var(--border)}
+@media(min-width:500px){.stats-row{grid-template-columns:repeat(4,1fr)}}
+.stat{padding:22px 12px;text-align:center;border-right:1px solid var(--border)}
+.stat:nth-child(2n){border-right:none}
+@media(min-width:500px){.stat:nth-child(2n){border-right:1px solid var(--border)}.stat:last-child{border-right:none}}
+.stat-n{font-size:28px;font-weight:700;color:var(--navy);line-height:1}
+.stat-l{font-size:12px;color:var(--muted);margin-top:3px}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr;gap:16px;margin-top:32px}
+.g3{display:grid;grid-template-columns:1fr;gap:16px;margin-top:32px}
+.g4{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:28px}
+@media(min-width:500px){.g3{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:720px){.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.g4{grid-template-columns:repeat(4,1fr)}}
+
+/* ── CARD ── */
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:0 4px 18px rgba(15,32,68,.08);transform:translateY(-2px)}
+.ci{width:42px;height:42px;border-radius:10px;background:#fff3e8;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px;flex-shrink:0}
+.card h3{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:6px}
+.card p{font-size:13px;color:var(--muted);line-height:1.6}
+.clink{display:inline-flex;align-items:center;gap:4px;color:var(--accent);font-size:13px;font-weight:600;margin-top:10px;cursor:pointer}
+
+/* ── STEPS ── */
+.steps{display:grid;grid-template-columns:1fr;gap:0;margin-top:36px}
+@media(min-width:600px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{padding:22px;text-align:center}
+.step-n{width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.step h3{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px}
+.step p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ── TESTIMONIALS ── */
+.tcard{background:var(--light);border-radius:var(--radius-lg);padding:20px}
+.ttext{font-size:13px;color:var(--text);line-height:1.7;font-style:italic;margin-bottom:12px}
+.tauthor{font-size:13px;font-weight:600;color:var(--navy)}
+.trole{font-size:12px;color:var(--muted)}
+.stars{color:#f59e0b;font-size:13px;margin-bottom:8px}
+
+/* ── PRICING ── */
+.price-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:36px}
+@media(min-width:540px){.price-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.price-grid{grid-template-columns:repeat(4,1fr)}}
+.pcard{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:24px;position:relative}
+.pcard.featured{border-color:var(--accent)}
+.pbadge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:3px 14px;border-radius:20px;white-space:nowrap}
+.pname{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.pamount{font-size:30px;font-weight:700;color:var(--navy);margin:8px 0 3px}
+.pamount span{font-size:14px;font-weight:400;color:var(--muted)}
+.pdesc{font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.5}
+.plist{list-style:none;margin-bottom:20px}
+.plist li{font-size:13px;color:var(--text);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.plist li:last-child{border:none}
+.chk{color:var(--green);font-size:13px;flex-shrink:0}
+.xchk{color:#cbd5e1;font-size:13px;flex-shrink:0}
+.btn-b{display:block;width:100%;text-align:center;padding:10px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;min-height:42px;transition:all .2s}
+.btn-navy{background:var(--navy);color:#fff}.btn-navy:hover{background:var(--navy2)}
+.btn-acc{background:var(--accent);color:#fff}.btn-acc:hover{background:var(--accent2)}
+.btn-bdr{background:transparent;color:var(--navy);border:1.5px solid var(--border)}.btn-bdr:hover{border-color:var(--navy)}
+
+/* ── FAQ ── */
+.faq-wrap{max-width:720px;margin:36px auto 0}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 0;cursor:pointer;font-size:14px;font-weight:600;color:var(--navy);gap:12px;min-height:44px}
+.faq-icon{font-size:18px;color:var(--muted);flex-shrink:0;transition:transform .2s}
+.faq-item.open .faq-icon{transform:rotate(45deg);color:var(--accent)}
+.faq-a{font-size:13px;color:var(--muted);line-height:1.7;padding-bottom:14px;display:none}
+.faq-item.open .faq-a{display:block}
+
+/* ── COLLEGES ── */
+.filter-bar{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:var(--light);border-radius:var(--radius-lg);padding:16px;margin:24px 0}
+@media(min-width:600px){.filter-bar{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.filter-bar{grid-template-columns:repeat(6,1fr)}}
+.coll-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:600px){.coll-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.coll-grid{grid-template-columns:repeat(3,1fr)}}
+.ccard{border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;transition:all .2s}
+.ccard:hover{border-color:#c7d5e8;box-shadow:0 4px 14px rgba(15,32,68,.07)}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.clogo{width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,var(--navy),var(--navy2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;flex-shrink:0}
+.cbadge{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:600}
+.bg-govt{background:#dcfce7;color:#15803d}.bg-pvt{background:#dbeafe;color:#1d4ed8}.bg-deemed{background:#fef3c7;color:#b45309}
+.cname{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.cloc{font-size:12px;color:var(--muted)}
+.ctags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.ctag{background:var(--light);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:2px 9px;border-radius:20px}
+.cfee{font-size:13px;color:var(--navy);font-weight:600;margin-bottom:10px}
+.cbtns{display:flex;gap:8px;flex-wrap:wrap}
+.sm-btn{padding:7px 13px;font-size:12px;font-weight:600;border-radius:7px;cursor:pointer;border:none;min-height:36px;transition:all .2s}
+.sm-navy{background:var(--navy);color:#fff}.sm-navy:hover{background:var(--navy2)}
+.sm-bdr{background:transparent;color:var(--navy);border:1.5px solid var(--border)}.sm-bdr:hover{border-color:var(--navy)}
+
+/* ── ADMIN PANEL ── */
+.admin-panel{background:var(--light);border:2px dashed var(--border);border-radius:var(--radius-lg);padding:20px;margin-top:32px}
+@media(min-width:600px){.admin-panel{padding:28px}}
+.admin-top{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+@media(min-width:500px){.admin-top{flex-direction:row;justify-content:space-between;align-items:center}}
+.admin-tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.atab{padding:8px 14px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .2s}
+.atab.active{color:var(--navy);border-color:var(--navy)}
+.fsec-title{font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid var(--border)}
+.fg{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:20px}
+@media(min-width:500px){.fg{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:800px){.fg{grid-template-columns:repeat(3,1fr)}}
+label{display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:5px}
+input,select,textarea{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;color:var(--text);background:var(--white);transition:border .15s;-webkit-appearance:none;appearance:none;min-height:42px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy)}
+textarea{resize:vertical;min-height:90px}
+.tog-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border);min-height:48px}
+.tog-row:last-child{border:none}
+.tog-row span{font-size:13px;color:var(--text)}
+.tog{width:40px;height:22px;background:var(--border);border-radius:11px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
+.tog.on{background:var(--green)}
+.tog::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:2px;left:2px;transition:transform .2s}
+.tog.on::after{transform:translateX(18px)}
+.admin-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:16px}
+
+/* ── COUNTRY ── */
+.country-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:32px}
+@media(min-width:500px){.country-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.country-grid{grid-template-columns:repeat(3,1fr)}}
+.cntry-card{border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;transition:all .2s}
+.cntry-card:hover{border-color:#c7d5e8;box-shadow:0 4px 14px rgba(15,32,68,.06)}
+.flag{font-size:26px;margin-bottom:8px}
+.cntry-card h3{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:7px}
+.cntry-card p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.ptags{display:flex;flex-wrap:wrap;gap:5px}
+.ptag{background:var(--light);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:2px 9px;border-radius:20px}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr;gap:32px;margin-top:36px}
+@media(min-width:800px){.contact-grid{grid-template-columns:1fr 1.4fr}}
+.cinfo h3{font-size:17px;font-weight:600;color:var(--navy);margin-bottom:18px}
+.citem{display:flex;gap:12px;margin-bottom:18px;align-items:flex-start}
+.cicon{width:40px;height:40px;border-radius:10px;background:#fff3e8;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.citem h4{font-size:13px;font-weight:600;color:var(--navy)}
+.citem p{font-size:13px;color:var(--muted);margin-top:1px}
+.form-box{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px}
+@media(min-width:600px){.form-box{padding:28px}}
+.fr{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:480px){.fr{grid-template-columns:1fr 1fr}}
+.fg-single{margin-bottom:14px}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr;gap:40px;margin-top:40px}
+@media(min-width:800px){.about-grid{grid-template-columns:1fr 1fr;align-items:start}}
+.about-vis{background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:var(--radius-lg);padding:28px;color:#fff;text-align:center}
+.about-big{font-size:54px;font-weight:800;margin-bottom:4px}
+.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px}
+.mini-stat{background:rgba(255,255,255,.1);border-radius:10px;padding:14px;text-align:center}
+.mini-n{font-size:20px;font-weight:700}
+.mini-l{font-size:11px;color:rgba(255,255,255,.6);margin-top:3px}
+.val-item{padding:12px 0;border-bottom:1px solid var(--border);display:flex;gap:12px}
+.val-item:last-child{border:none}
+.vdot{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:6px;flex-shrink:0}
+.val-item h4{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:3px}
+.val-item p{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ── PARENT MOCK ── */
+.pmock{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.pmock-head{background:var(--navy);padding:12px 16px;display:flex;align-items:center;gap:6px}
+.mdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3)}
+.mtitle{color:rgba(255,255,255,.75);font-size:12px;margin-left:6px}
+.pmock-body{padding:16px}
+.mstat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.mstat{background:var(--light);border-radius:8px;padding:10px;text-align:center}
+.mstat-n{font-size:18px;font-weight:700;color:var(--navy)}
+.mstat-l{font-size:11px;color:var(--muted);margin-top:2px}
+.mapp{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px}
+.mapp:last-child{border:none}
+.mst{font-size:11px;padding:2px 9px;border-radius:20px;font-weight:600}
+.sg{background:#dcfce7;color:#15803d}.sa{background:#fef3c7;color:#b45309}.sb{background:#dbeafe;color:#1d4ed8}
+
+/* ── BLOG ── */
+.blog-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:32px}
+@media(min-width:500px){.blog-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.blog-grid{grid-template-columns:repeat(3,1fr)}}
+.bcard{border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .2s;display:flex;flex-direction:column}
+.bcard:hover{box-shadow:0 4px 18px rgba(15,32,68,.1);transform:translateY(-2px)}
+.bimg{height:120px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.bbody{padding:16px;flex:1;display:flex;flex-direction:column}
+.bcat{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.bcard h3{font-size:14px;font-weight:600;color:var(--navy);line-height:1.4;margin-bottom:6px}
+.bcard p{font-size:12px;color:var(--muted);line-height:1.5;flex:1}
+.bmeta{font-size:11px;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+
+/* ── CAREER ── */
+.ctool{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-top:18px;transition:border .2s}
+.ctool:hover{border-color:var(--accent)}
+@media(min-width:700px){.ctool{padding:28px}}
+.ctool-row{display:flex;flex-direction:column;gap:16px}
+@media(min-width:600px){.ctool-row{flex-direction:row;align-items:flex-start}}
+.cnum{font-size:40px;font-weight:800;color:var(--light);-webkit-text-stroke:2px var(--navy);flex-shrink:0;display:none}
+@media(min-width:600px){.cnum{display:block}}
+.ctool h3{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:7px}
+.ctool p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+
+/* ── TOOLS ── */
+.tool-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:32px}
+@media(min-width:500px){.tool-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.tool-grid{grid-template-columns:repeat(3,1fr)}}
+.tcrd{border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;transition:border .2s}
+.tcrd:hover{border-color:var(--accent);background:#fffbf8}
+.tnum{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px}
+.tcrd h3{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:7px}
+.tcrd p{font-size:13px;color:var(--muted);line-height:1.6}
+.twhy{background:var(--light);border-radius:7px;padding:10px;margin-top:10px;font-size:12px;color:var(--text);line-height:1.5}
+.twhy strong{color:var(--navy)}
+
+/* ── AGENCIES ── */
+.ag-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:32px}
+@media(min-width:600px){.ag-grid{grid-template-columns:repeat(3,1fr)}}
+.agcard{border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px}
+.agcard.featured{border-color:var(--accent);background:#fffbf8}
+.agcard h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:7px}
+.agcard .desc{font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5}
+.agf{font-size:13px;color:var(--text);padding:4px 0;display:flex;align-items:center;gap:8px}
+
+/* ── CTA BANNER ── */
+.cta-banner{background:var(--navy);padding:52px 16px;text-align:center}
+@media(min-width:600px){.cta-banner{padding:64px 5%}}
+.cta-banner h2{font-size:clamp(22px,3.5vw,32px);font-weight:700;color:#fff;margin-bottom:10px}
+.cta-banner p{font-size:15px;color:rgba(255,255,255,.7);margin-bottom:24px}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);color:rgba(255,255,255,.7);padding:44px 16px 24px}
+@media(min-width:600px){footer{padding:52px 5% 28px}}
+.foot-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:36px}
+@media(min-width:700px){.foot-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+.foot-brand{grid-column:1/-1}
+@media(min-width:700px){.foot-brand{grid-column:auto}}
+.flogo{font-size:19px;font-weight:700;color:#fff;margin-bottom:10px;display:block}
+.flogo span{color:var(--accent)}
+.foot-brand p{font-size:13px;line-height:1.6}
+footer h4{font-size:12px;font-weight:700;color:#fff;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+footer ul{list-style:none}
+footer ul li{margin-bottom:8px}
+footer ul li a{font-size:13px;color:rgba(255,255,255,.6);cursor:pointer;transition:color .15s}
+footer ul li a:hover{color:#fff}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;display:flex;flex-direction:column;gap:6px;font-size:12px}
+@media(min-width:600px){.foot-bottom{flex-direction:row;justify-content:space-between}}
+
+/* ── SERVICE ITEMS ── */
+.srv-feat{font-size:13px;color:var(--text);padding:5px 0;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.srv-feat:last-child{border:none}
+
+/* ── PARENT SECTION ── */
+.parent-grid{display:grid;grid-template-columns:1fr;gap:32px;margin-top:36px}
+@media(min-width:800px){.parent-grid{grid-template-columns:1fr 1fr;align-items:start}}
+.pf{display:flex;gap:12px;margin-bottom:18px;align-items:flex-start}
+.pico{width:40px;height:40px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.pf h4{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.pf p{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ── DESKTOP NAV ── */
+@media(min-width:960px){.nav-desktop{display:flex}.hamburger{display:none}}
+</style>
+</head>
+<body>
+
+<div class="ticker">
+  <span class="ticker-track">🟢 KEAM 2025 Open | 🟢 TNEA Registration Live | 🟢 COMEDK 2025 Announced | 🟢 JEE Main Results Out | 🟢 NEET Counselling Begins | 🟢 Scholarship Matching Available&nbsp;&nbsp;&nbsp;&nbsp;🟢 KEAM 2025 Open | 🟢 TNEA Registration Live | 🟢 COMEDK 2025 Announced | 🟢 JEE Main Results Out | 🟢 NEET Counselling Begins | 🟢 Scholarship Matching Available</span>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo" id="logo-home">Zap<span>tockz</span></div>
+    <div class="nav-desktop">
+      <a id="nd-home" class="active" onclick="go('home')">Home</a>
+      <a id="nd-colleges" onclick="go('colleges')">Colleges</a>
+      <a id="nd-services" onclick="go('services')">Services</a>
+      <a id="nd-abroad" onclick="go('abroad')">Study Abroad</a>
+      <a id="nd-career" onclick="go('career')">Career</a>
+      <a id="nd-tools" onclick="go('tools')">Tools</a>
+      <a id="nd-pricing" onclick="go('pricing')">Pricing</a>
+      <a id="nd-agencies" onclick="go('agencies')">Agencies</a>
+      <a id="nd-about" onclick="go('about')">About</a>
+      <a id="nd-blog" onclick="go('blog')">Blog</a>
+      <a onclick="go('contact')" class="nav-cta">Free Session</a>
+    </div>
+    <button class="hamburger" id="hbg" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="drawer" id="drawer">
+  <a onclick="go('home')">Home</a>
+  <a onclick="go('colleges')">Colleges</a>
+  <a onclick="go('services')">Services</a>
+  <a onclick="go('abroad')">Study Abroad</a>
+  <a onclick="go('career')">Career Guidance</a>
+  <a onclick="go('tools')">Tools & Platform</a>
+  <a onclick="go('pricing')">Pricing</a>
+  <a onclick="go('agencies')">For Agencies</a>
+  <a onclick="go('about')">About Us</a>
+  <a onclick="go('blog')">Blog</a>
+  <a class="drawer-cta" onclick="go('contact')">Book Free Session</a>
+</div>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <h1>Your Right College Is Out There.<br><span>We'll Help You Find It.</span></h1>
+    <p>India's emerging admission platform — expert counselling, smart tools, and end-to-end support so your Class 12 decision is confident, not confusing.</p>
+    <div class="hero-btns">
+      <button class="btn btn-primary" onclick="go('contact')">Start Free Counselling</button>
+      <button class="btn btn-outline" onclick="go('colleges')">Explore Colleges</button>
+    </div>
+    <div class="trust-strip">
+      <div class="trust-item"><div class="tdot"></div>200+ students guided</div>
+      <div class="trust-item"><div class="tdot"></div>Kerala · Tamil Nadu · Karnataka</div>
+      <div class="trust-item"><div class="tdot"></div>Free first session</div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n">200+</div><div class="stat-l">Students Guided</div></div>
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l">States Active</div></div>
+    <div class="stat"><div class="stat-n">6</div><div class="stat-l">Services Live</div></div>
+    <div class="stat"><div class="stat-n">2024</div><div class="stat-l">Founded</div></div>
+  </div>
+
+  <section style="background:var(--light)">
+    <div class="center">
+      <div class="tag">The Problem</div>
+      <div class="h2">Choosing a College Shouldn't Feel This Hard</div>
+      <div class="sub">After Class 12, most students navigate one of life's biggest decisions with incomplete information and no real support.</div>
+    </div>
+    <div class="g3">
+      <div class="card"><div class="ci">🎯</div><h3>Wrong College Choices</h3><p>Students apply to institutions that don't match their profile — and lose seats they deserved elsewhere.</p></div>
+      <div class="card"><div class="ci">⏰</div><h3>Missed Deadlines</h3><p>With dozens of exam and counselling dates, important rounds get missed with no one tracking them.</p></div>
+      <div class="card"><div class="ci">💸</div><h3>Overpaying for Less</h3><p>Families pay inflated fees to consultants who disappear after taking money with nothing to show.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="center">
+      <div class="tag">How It Works</div>
+      <div class="h2">Your Admission Journey, Step by Step</div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><h3>Understand Your Profile</h3><p>Share your marks, interests, and goals. Our counsellors map out the right courses and colleges for you.</p></div>
+      <div class="step"><div class="step-n">2</div><h3>Explore Your Options</h3><p>Use our smart tools to compare colleges, check cutoffs, and shortlist the best-fit institutions across India.</p></div>
+      <div class="step"><div class="step-n">3</div><h3>Apply with Confidence</h3><p>We handle paperwork, track deadlines, and guide you through every form — nothing falls through the cracks.</p></div>
+      <div class="step"><div class="step-n">4</div><h3>Secure Your Seat</h3><p>From scholarship matching to loan assistance, we stay with you until you're enrolled and settled.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:28px"><button class="btn btn-primary" onclick="go('contact')">Begin Your Journey</button></div>
+  </section>
+
+  <section style="background:var(--light)">
+    <div class="center"><div class="tag">Services</div><div class="h2">Everything You Need, Under One Platform</div></div>
+    <div class="g3">
+      <div class="card"><div class="ci">🎓</div><h3>College Admissions</h3><p>End-to-end support across India — from shortlisting to enrollment.</p><div class="clink" onclick="go('services')">Learn more →</div></div>
+      <div class="card"><div class="ci">🧭</div><h3>Student Counselling</h3><p>Personalised guidance based on your profile, interests, and goals.</p><div class="clink" onclick="go('services')">Learn more →</div></div>
+      <div class="card"><div class="ci">💰</div><h3>Scholarship Matching</h3><p>Find funding you actually qualify for — automatically matched.</p><div class="clink" onclick="go('services')">Learn more →</div></div>
+      <div class="card"><div class="ci">🏦</div><h3>Bank Loan Assistance</h3><p>Education finance made simple, from eligibility to disbursement.</p><div class="clink" onclick="go('services')">Learn more →</div></div>
+      <div class="card"><div class="ci">💻</div><h3>Online Degrees</h3><p>Flexible, UGC-recognised degrees through verified university partners.</p><div class="clink" onclick="go('services')">Learn more →</div></div>
+      <div class="card"><div class="ci">📚</div><h3>Plus Two Programs</h3><p>Certified 10+2 completion through verified partner institutions.</p><div class="clink" onclick="go('services')">Learn more →</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="center"><div class="tag">Student Stories</div><div class="h2">Students Who Found Their Path</div></div>
+    <div class="g3">
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"I had no idea which engineering college to target after KEAM. The counsellor mapped out my options in one session and helped me apply before I knew the deadline was close."</p><div class="tauthor">Arjun M.</div><div class="trole">B.Tech Student, Kerala</div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"Getting a scholarship felt impossible until Zaptockz matched me with two I actually qualified for. One covered my entire first year."</p><div class="tauthor">Sneha R.</div><div class="trole">BCA Student, Tamil Nadu</div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"The application tracker kept me calm throughout. I always knew what was pending and what was done — no last-minute surprises."</p><div class="tauthor">Rahul K.</div><div class="trole">B.Com Student, Karnataka</div></div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Your Future Starts with One Decision. Make It the Right One.</h2>
+    <p>Book a free counselling session — no pressure, no confusion.</p>
+    <div class="cta-btns">
+      <button class="btn btn-primary" onclick="go('contact')">Book My Free Session</button>
+      <button class="btn btn-outline" onclick="go('pricing')">View Pricing</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ COLLEGES ═══════════ -->
+<div class="page" id="page-colleges">
+  <section>
+    <div class="tag">College Directory</div>
+    <div class="h1">Explore Colleges Across India</div>
+    <div class="sub">Browse our verified directory — filter by state, stream, entrance exam, and more.</div>
+    <div class="filter-bar">
+      <select><option>All States</option><option>Kerala</option><option>Tamil Nadu</option><option>Karnataka</option><option>Maharashtra</option><option>Delhi</option></select>
+      <select><option>All Streams</option><option>Engineering</option><option>Medical</option><option>Law</option><option>Management</option><option>Arts & Science</option></select>
+      <select><option>All Exams</option><option>KEAM</option><option>TNEA</option><option>KCET</option><option>NEET</option><option>JEE</option></select>
+      <select><option>All Types</option><option>Government</option><option>Private</option><option>Deemed</option></select>
+      <select><option>All Fees</option><option>Under ₹50k</option><option>₹50k–₹1L</option><option>₹1L–₹3L</option><option>₹3L+</option></select>
+      <button class="btn btn-primary" style="border:none;width:100%;min-height:42px">Search</button>
+    </div>
+    <div class="coll-grid">
+      <div class="ccard"><div class="chead"><div class="clogo">NIT</div><span class="cbadge bg-govt">Government</span></div><div class="cname">NIT Calicut</div><div class="cloc">📍 Calicut, Kerala</div><div class="ctags"><span class="ctag">Engineering</span><span class="ctag">JEE</span><span class="ctag">KEAM</span></div><div class="cfee">₹1.2L – ₹1.5L / year</div><p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5">One of India's premier NITs with exceptional placement records across core engineering branches.</p><div class="cbtns"><button class="sm-btn sm-navy">View Details</button><button class="sm-btn sm-bdr" onclick="go('contact')">Get Counselling</button></div></div>
+      <div class="ccard"><div class="chead"><div class="clogo" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">PSG</div><span class="cbadge bg-pvt">Private</span></div><div class="cname">PSG College of Technology</div><div class="cloc">📍 Coimbatore, Tamil Nadu</div><div class="ctags"><span class="ctag">Engineering</span><span class="ctag">TNEA</span></div><div class="cfee">₹80k – ₹1.2L / year</div><p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5">A top autonomous institution in Tamil Nadu known for strong industry connections and placement records.</p><div class="cbtns"><button class="sm-btn sm-navy">View Details</button><button class="sm-btn sm-bdr" onclick="go('contact')">Get Counselling</button></div></div>
+      <div class="ccard"><div class="chead"><div class="clogo" style="background:linear-gradient(135deg,#7c3aed,#a855f7)">RVCe</div><span class="cbadge bg-pvt">Private</span></div><div class="cname">RV College of Engineering</div><div class="cloc">📍 Bangalore, Karnataka</div><div class="ctags"><span class="ctag">Engineering</span><span class="ctag">KCET</span><span class="ctag">COMEDK</span></div><div class="cfee">₹1.5L – ₹2.5L / year</div><p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5">One of Bangalore's most reputed engineering colleges with strong ties to the city's tech ecosystem.</p><div class="cbtns"><button class="sm-btn sm-navy">View Details</button><button class="sm-btn sm-bdr" onclick="go('contact')">Get Counselling</button></div></div>
+      <div class="ccard"><div class="chead"><div class="clogo" style="background:linear-gradient(135deg,#0f766e,#14b8a6)">AIMS</div><span class="cbadge bg-deemed">Deemed</span></div><div class="cname">Amrita Institute of Medical Sciences</div><div class="cloc" >📍 Kochi, Kerala</div><div class="ctags"><span class="ctag">Medical</span><span class="ctag">NEET</span></div><div class="cfee">₹5L – ₹8L / year</div><p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5">Leading deemed university hospital and medical college with NAAC A++ accreditation.</p><div class="cbtns"><button class="sm-btn sm-navy">View Details</button><button class="sm-btn sm-bdr" onclick="go('contact')">Get Counselling</button></div></div>
+      <div class="ccard"><div class="chead"><div class="clogo" style="background:linear-gradient(135deg,#b45309,#f59e0b)">GLC</div><span class="cbadge bg-govt">Government</span></div><div class="cname">Government Law College</div><div class="cloc">📍 Ernakulam, Kerala</div><div class="ctags"><span class="ctag">Law</span><span class="ctag">CLAT</span></div><div class="cfee">₹20k – ₹40k / year</div><p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5">Kerala's oldest and most established law college producing lawyers and judges for decades.</p><div class="cbtns"><button class="sm-btn sm-navy">View Details</button><button class="sm-btn sm-bdr" onclick="go('contact')">Get Counselling</button></div></div>
+      <div class="ccard"><div class="chead"><div class="clogo" style="background:linear-gradient(135deg,#0369a1,#38bdf8)">IIMB</div><span class="cbadge bg-govt">Government</span></div><div class="cname">IIM Bangalore</div><div class="cloc">📍 Bangalore, Karnataka</div><div class="ctags"><span class="ctag">Management</span><span class="ctag">CAT</span></div><div class="cfee">₹23L – ₹25L total</div><p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5">India's top business school with a stellar alumni network, consistently ranked among Asia's best.</p><div class="cbtns"><button class="sm-btn sm-navy">View Details</button><button class="sm-btn sm-bdr" onclick="go('contact')">Get Counselling</button></div></div>
+    </div>
+    <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--muted)">Can't find what you need? <span style="color:var(--accent);cursor:pointer;font-weight:600" onclick="go('contact')">Talk to a Counsellor →</span></p>
+  </section>
+
+  <section style="background:var(--light)">
+    <div class="tag">Admin Panel</div>
+    <div class="h2">Manage College Listings</div>
+    <div class="sub">Add, edit, or remove college entries from the public directory.</div>
+    <div class="admin-panel">
+      <div class="admin-top">
+        <div style="font-size:15px;font-weight:700;color:var(--navy)">College Management Panel</div>
+        <button class="btn btn-primary" style="border:none;padding:9px 18px;font-size:13px;white-space:nowrap">+ Add New College</button>
+      </div>
+      <div class="admin-tabs">
+        <div class="atab active">Add College</div>
+        <div class="atab">Manage Listings</div>
+        <div class="atab">Bulk Import CSV</div>
+      </div>
+      <div class="fsec-title">Basic Information</div>
+      <div class="fg">
+        <div><label>College Name *</label><input type="text" placeholder="e.g. NIT Calicut"></div>
+        <div><label>College Type *</label><select><option>Government</option><option>Private</option><option>Deemed</option><option>Autonomous</option></select></div>
+        <div><label>Affiliation / University *</label><input type="text" placeholder="e.g. University of Calicut"></div>
+        <div><label>NAAC Grade</label><select><option>Not Accredited</option><option>A++</option><option>A+</option><option>A</option><option>B++</option></select></div>
+        <div><label>Official Website</label><input type="url" placeholder="https://"></div>
+        <div><label>Established Year</label><input type="number" placeholder="e.g. 1961"></div>
+      </div>
+      <div class="fc-title" style="font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;margin:18px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--border)">Location</div>
+      <div class="fg">
+        <div><label>City *</label><input type="text" placeholder="City"></div>
+        <div><label>State *</label><select><option>Kerala</option><option>Tamil Nadu</option><option>Karnataka</option><option>Maharashtra</option><option>Delhi</option></select></div>
+        <div><label>PIN Code</label><input type="text" placeholder="6-digit PIN"></div>
+        <div><label>Google Maps Link</label><input type="url" placeholder="https://maps.google.com/..."></div>
+      </div>
+      <div class="fc-title" style="font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;margin:18px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--border)">Fees & Admissions</div>
+      <div class="fg">
+        <div><label>Min Annual Fees (₹) *</label><input type="number" placeholder="80000"></div>
+        <div><label>Max Annual Fees (₹) *</label><input type="number" placeholder="150000"></div>
+        <div><label>Stream *</label><select><option>Engineering</option><option>Medical</option><option>Law</option><option>Management</option><option>Arts & Science</option></select></div>
+        <div><label>Entrance Exam *</label><select><option>KEAM</option><option>TNEA</option><option>KCET</option><option>NEET</option><option>JEE</option></select></div>
+      </div>
+      <div class="fc-title" style="font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;margin:18px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--border)">Description</div>
+      <div style="margin-bottom:12px"><label>Short Description (max 150 chars) *</label><input type="text" maxlength="150" placeholder="Brief summary for the listing card"></div>
+      <div style="margin-bottom:20px"><label>Full Description *</label><textarea placeholder="Detailed information about the college..."></textarea></div>
+      <div class="fc-title" style="font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;margin:18px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--border)">Visibility Settings</div>
+      <div class="tog-row"><span>Listing Status (Live)</span><div class="tog on"></div></div>
+      <div class="tog-row"><span>Featured on Homepage</span><div class="tog"></div></div>
+      <div class="tog-row"><span>Zaptockz Partner College</span><div class="tog"></div></div>
+      <div class="tog-row"><span>Scholarships Available</span><div class="tog on"></div></div>
+      <div class="admin-actions" style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:16px">
+        <button class="btn-b btn-bdr" style="width:auto;padding:9px 20px;font-size:13px">Save Draft</button>
+        <button class="btn-b btn-acc" style="width:auto;padding:9px 20px;font-size:13px;border:none">Publish Listing</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<div class="page" id="page-services">
+  <section>
+    <div class="tag">Our Services</div>
+    <div class="h1">Everything You Need for College Admissions</div>
+    <div class="sub">From first counselling session to final enrollment — Zaptockz covers every step.</div>
+  </section>
+  <div style="padding:0 16px 60px">
+    <div class="g2" style="gap:20px">
+      <div class="card" style="padding:24px"><div class="ci" style="font-size:22px">🎓</div><h3 style="font-size:17px;margin-bottom:8px">College Admissions</h3><p style="margin-bottom:14px">End-to-end support across India — shortlisting, applications, documentation, and enrollment.</p><div class="srv-feat"><span style="color:var(--green)">✓</span>Academic profile review</div><div class="srv-feat"><span style="color:var(--green)">✓</span>KEAM, TNEA, KCET, JEE, NEET & more</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Merit & management quota support</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Document checklist & submission</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Real-time dashboard tracking</div><button class="btn btn-primary" style="border:none;margin-top:16px;width:100%" onclick="go('contact')">Book Free Session</button></div>
+      <div class="card" style="padding:24px"><div class="ci" style="font-size:22px">🧭</div><h3 style="font-size:17px;margin-bottom:8px">Student Counselling</h3><p style="margin-bottom:14px">Honest guidance based on your strengths, interests, financial reality, and career goals.</p><div class="srv-feat"><span style="color:var(--green)">✓</span>Score & profile analysis</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Course & stream recommendations</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Realistic cutoff comparisons</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Career path overview</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Action plan with timelines</div><button class="btn btn-primary" style="border:none;margin-top:16px;width:100%" onclick="go('contact')">Book Free Session</button></div>
+      <div class="card" style="padding:24px"><div class="ci" style="font-size:22px">💰</div><h3 style="font-size:17px;margin-bottom:8px">Scholarship Matching</h3><p style="margin-bottom:14px">Automatically matched to scholarships you qualify for — across all sources.</p><div class="srv-feat"><span style="color:var(--green)">✓</span>Central Govt schemes (NSP portal)</div><div class="srv-feat"><span style="color:var(--green)">✓</span>State-level merit scholarships</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Institution-specific fee waivers</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Private trust scholarships</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Application guidance included</div><button class="btn btn-primary" style="border:none;margin-top:16px;width:100%" onclick="go('contact')">Check Eligibility</button></div>
+      <div class="card" style="padding:24px"><div class="ci" style="font-size:22px">🏦</div><h3 style="font-size:17px;margin-bottom:8px">Bank Loan Assistance</h3><p style="margin-bottom:14px">Trusted banking partners + step-by-step guidance from eligibility to disbursement.</p><div class="srv-feat"><span style="color:var(--green)">✓</span>Loan eligibility assessment</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Multi-bank comparison</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Documentation support</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Interest subsidy information</div><div class="srv-feat"><span style="color:var(--green)">✓</span>Moratorium & repayment guidance</div><button class="btn btn-primary" style="border:none;margin-top:16px;width:100%" onclick="go('contact')">Talk to Advisor</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ STUDY ABROAD ═══════════ -->
+<div class="page" id="page-abroad">
+  <div class="hero" style="padding:52px 16px 44px">
+    <h1>Your Dream University Is <span>Closer Than You Think.</span></h1>
+    <p>Zaptockz guides Indian students through every step of international admissions — from finding the right university to landing your visa.</p>
+    <div class="hero-btns"><button class="btn btn-primary" onclick="go('contact')">Free Study Abroad Consultation</button></div>
+  </div>
+  <section>
+    <div class="center"><div class="tag">Destinations</div><div class="h2">Countries We Cover</div></div>
+    <div class="country-grid">
+      <div class="cntry-card"><div class="flag">🇺🇸</div><h3>United States</h3><p>World's highest-ranked universities. We handle Common App, GPA/test matching, SOP crafting, and F-1 visa guidance.</p><div class="ptags"><span class="ptag">MS</span><span class="ptag">MBA</span><span class="ptag">BS Engineering</span></div></div>
+      <div class="cntry-card"><div class="flag">🇬🇧</div><h3>United Kingdom</h3><p>3-year undergrad, world-class postgrad, and Post-Study Work Visa. We manage UCAS applications and personal statements.</p><div class="ptags"><span class="ptag">LLB</span><span class="ptag">MBA</span><span class="ptag">MSc</span></div></div>
+      <div class="cntry-card"><div class="flag">🇨🇦</div><h3>Canada</h3><p>High acceptance rates, affordable tuition, and clear PGWP pathways. We support university and college applications.</p><div class="ptags"><span class="ptag">Business</span><span class="ptag">IT</span><span class="ptag">Healthcare</span></div></div>
+      <div class="cntry-card"><div class="flag">🇦🇺</div><h3>Australia</h3><p>Strong STEM programs, welcoming visa process, up to 4 years post-study work rights. End-to-end support.</p><div class="ptags"><span class="ptag">Engineering</span><span class="ptag">Nursing</span><span class="ptag">MBA</span></div></div>
+      <div class="cntry-card"><div class="flag">🇩🇪</div><h3>Germany</h3><p>Zero tuition at public universities for international students. We guide through applications and blocked account setup.</p><div class="ptags"><span class="ptag">M.Sc Engineering</span><span class="ptag">Computer Science</span></div></div>
+      <div class="cntry-card"><div class="flag">🇮🇪</div><h3>Ireland</h3><p>Growing hub for IT, pharma, and business with strong industry ties and EU residency pathways.</p><div class="ptags"><span class="ptag">Computer Science</span><span class="ptag">Business</span></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════ CAREER ═══════════ -->
+<div class="page" id="page-career">
+  <section>
+    <div class="tag">Career Guidance</div>
+    <div class="h1">Beyond Just College Admission</div>
+    <div class="sub">We help you choose the right path, not just the right place.</div>
+  </section>
+  <div style="padding:0 16px 60px">
+    <div class="g2" style="gap:20px">
+      <div class="card" style="padding:32px">
+        <div class="ci" style="font-size:28px">🧠</div>
+        <h3 style="font-size:20px;margin-bottom:12px">Psychometric Assessment</h3>
+        <p style="margin-bottom:20px;color:var(--muted)">Understand your natural strengths, personality traits, and career interests through scientifically validated testing.</p>
+        <div class="srv-feat"><span style="color:var(--green)">✓</span>Interest vs. Aptitude analysis</div>
+        <div class="srv-feat"><span style="color:var(--green)">✓</span>Personality profile report</div>
+        <div class="srv-feat"><span style="color:var(--green)">✓</span>Best-fit career clusters</div>
+        <button class="btn btn-primary" style="margin-top:24px;width:100%" onclick="go('contact')">Take Assessment</button>
+      </div>
+      <div class="card" style="padding:32px">
+        <div class="ci" style="font-size:28px">🛣️</div>
+        <h3 style="font-size:20px;margin-bottom:12px">Career Path Mapping</h3>
+        <p style="margin-bottom:20px;color:var(--muted)">Work with experts to map out your 5-year journey from college to your first major career milestone.</p>
+        <div class="srv-feat"><span style="color:var(--green)">✓</span>Industry trend insights</div>
+        <div class="srv-feat"><span style="color:var(--green)">✓</span>Skill-gap analysis</div>
+        <div class="srv-feat"><span style="color:var(--green)">✓</span>Interdisciplinary options</div>
+        <button class="btn btn-primary" style="margin-top:24px;width:100%" onclick="go('contact')">Map My Career</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TOOLS ═══════════ -->
+<div class="page" id="page-tools">
+  <section>
+    <div class="tag">Tools & Platform</div>
+    <div class="h1">Smart Tools for Smarter Decisions</div>
+    <div class="sub">Data-driven tools to help you compare, track, and win your admission.</div>
+  </section>
+  <div style="padding:0 16px 60px">
+    <div class="g3">
+      <div class="card">
+        <div class="ci">📊</div>
+        <h3>Cutoff Predictor</h3>
+        <p>Enter your marks and see your probability of getting into specific colleges based on 5-year trends.</p>
+        <button class="sm-btn sm-navy" style="margin-top:12px">Try Predictor</button>
+      </div>
+      <div class="card">
+        <div class="ci">📑</div>
+        <h3>Application Tracker</h3>
+        <p>A unified dashboard to track every deadline, form status, and required document for all your applications.</p>
+        <button class="sm-btn sm-navy" style="margin-top:12px">Access Tracker</button>
+      </div>
+      <div class="card">
+        <div class="ci">🤝</div>
+        <h3>Direct Chat</h3>
+        <p>Instant access to your dedicated counsellor for quick questions, document reviews, and mental support.</p>
+        <button class="sm-btn sm-navy" style="margin-top:12px">Start Chat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PRICING ═══════════ -->
+<div class="page" id="page-pricing">
+  <section>
+    <div class="tag">Pricing</div>
+    <div class="h1">Transparent Support Plans</div>
+    <div class="sub">Choose the level of guidance that fits your needs. No hidden charges.</div>
+  </section>
+  <div style="padding:0 16px 60px">
+    <div class="g3" style="align-items:flex-start">
+      <div class="card" style="border:1px solid var(--border)">
+        <h3 style="margin-bottom:4px">Discovery</h3>
+        <div style="font-size:24px;font-weight:800;margin-bottom:16px">Free</div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:20px">Perfect for starting your journey and understanding your options.</p>
+        <div class="srv-feat">✓ 1x Discovery call (30min)</div>
+        <div class="srv-feat">✓ Basic college directory</div>
+        <div class="srv-feat">✓ Entrance exam calendar</div>
+        <div class="srv-feat">✓ General scholarship alerts</div>
+        <button class="btn btn-outline" style="margin-top:24px;width:100%" onclick="go('contact')">Start Free</button>
+      </div>
+      <div class="card" style="border:2px solid var(--navy);transform:scale(1.05);z-index:10;background:var(--white)">
+        <div class="cbadge bg-govt" style="margin-bottom:12px;display:inline-block">MOST POPULAR</div>
+        <h3 style="margin-bottom:4px">Full Support</h3>
+        <div style="font-size:24px;font-weight:800;margin-bottom:16px">₹4,999<span style="font-size:14px;font-weight:400;color:var(--muted)"> / season</span></div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:20px">Comprehensive end-to-end guidance from choice to enrollment.</p>
+        <div class="srv-feat">✓ Unlimited counsellor chat</div>
+        <div class="srv-feat">✓ Application form filing assistance</div>
+        <div class="srv-feat">✓ Cutoff predictor access</div>
+        <div class="srv-feat">✓ Scholarship matching report</div>
+        <div class="srv-feat">✓ Document verification</div>
+        <button class="btn btn-primary" style="margin-top:24px;width:100%" onclick="go('contact')">Get Full Support</button>
+      </div>
+      <div class="card" style="border:1px solid var(--border)">
+        <h3 style="margin-bottom:4px">Premium</h3>
+        <div style="font-size:24px;font-weight:800;margin-bottom:16px">₹9,999<span style="font-size:14px;font-weight:400;color:var(--muted)"> / season</span></div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:20px">High-touch support for top-tier Indian & International colleges.</p>
+        <div class="srv-feat">✓ Dedicated Senior Advisor</div>
+        <div class="srv-feat">✓ SOP & Essay reviews</div>
+        <div class="srv-feat">✓ Bank loan & Visa assistance</div>
+        <div class="srv-feat">✓ Mock admission interviews</div>
+        <div class="srv-feat">✓ Management quota guidance</div>
+        <button class="btn btn-outline" style="margin-top:24px;width:100%" onclick="go('contact')">Go Premium</button>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;padding:24px;background:var(--light);border-radius:var(--radius)">
+        <p style="font-weight:700;color:var(--navy)">Are you a school or an agency?</p>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:16px">We offer custom white-label solutions and bulk pricing for partners.</p>
+        <button class="btn btn-outline" style="padding:8px 20px;font-size:14px" onclick="go('agencies')">Partner with Us</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ AGENCIES ═══════════ -->
+<div class="page" id="page-agencies">
+  <section>
+    <div class="tag">For Agencies</div>
+    <div class="h1">Scale Your Admission Business with Zaptockz</div>
+    <div class="sub">We provide the technology, data, and back-office support. You focus on students.</div>
+  </section>
+  <div style="padding:0 16px 60px">
+    <div class="g2">
+      <div class="card" style="padding:32px">
+        <h3>Admission Partner Program</h3>
+        <p style="margin-bottom:20px;color:var(--muted)">Run your own agency using the Zaptockz platform. Access our college tie-ups and tracking tools under your manual brand or ours.</p>
+        <div class="srv-feat">✓ Real-time lead management CRM</div>
+        <div class="srv-feat">✓ Direct commission tracking</div>
+        <div class="srv-feat">✓ Verified college database access</div>
+        <div class="srv-feat">✓ Support for KEAM/TNEA/KCET/NEET</div>
+      </div>
+      <div class="card" style="padding:32px">
+        <h3>School Partnership</h3>
+        <div class="tag" style="background:var(--navy);color:var(--white);margin-bottom:12px">FOR PRINCIPALS</div>
+        <p style="margin-bottom:20px;color:var(--muted)">Bring professional career counselling and admission support to your campus. We help your students make informed choices.</p>
+        <div class="srv-feat">✓ On-campus career workshops</div>
+        <div class="srv-feat">✓ Student profile dashboards for staff</div>
+        <div class="srv-feat">✓ Parent orientation sessions</div>
+        <div class="srv-feat">✓ Scholarship awareness camps</div>
+      </div>
+    </div>
+    <div style="margin-top:40px;text-align:center">
+      <button class="btn btn-primary" onclick="go('contact')">Inquire about Partnership</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<div class="page" id="page-about">
+  <section>
+    <div class="tag">About Us</div>
+    <div class="h1">Founded to Make Admissions Honest</div>
+    <div class="sub">Zaptockz was born in 2024 to simplify the confusing journey from Class 12 to College.</div>
+  </section>
+  <div style="padding:0 16px 60px">
+    <div class="g2" style="align-items:center">
+      <div>
+        <h2 style="margin-bottom:16px">Our Mission</h2>
+        <p style="margin-bottom:20px;color:var(--muted);font-size:16px;line-height:1.7">We believe every student deserves a seat in a college they love, without falling into debt or making choices based on half-truths. Our goal is to provide democratised access to college data and professional guidance.</p>
+        <h2 style="margin-bottom:16px">Why Zaptockz?</h2>
+        <div class="srv-feat" style="font-size:15px;margin-bottom:12px"><b>Zero Bias:</b> We don't push specific colleges. We push the right fit for you.</div>
+        <div class="srv-feat" style="font-size:15px;margin-bottom:12px"><b>Data Driven:</b> Our tools use verified cutoffs and fee data updated weekly.</div>
+        <div class="srv-feat" style="font-size:15px;margin-bottom:12px"><b>Full Spectrum:</b> From Kerala State Entrance to German Public Universities.</div>
+      </div>
+      <div class="card" style="padding:40px;background:var(--navy);color:var(--white)">
+        <h3 style="color:var(--white)">The Zaptockz Story</h3>
+        <p style="margin-top:16px;opacity:.9;line-height:1.6">What started as a small counseling initiative in Kerala has grown into a multi-state platform helping hundreds of students every admission season. We're a team of former educators, techies, and admissions experts dedicated to one thing: Your Future.</p>
+        <div style="margin-top:24px;display:flex;gap:12px">
+            <div style="flex:1"><div style="font-size:24px;font-weight:700">2024</div><div style="font-size:12px;opacity:.7">Founded</div></div>
+            <div style="flex:1"><div style="font-size:24px;font-weight:700">300+</div><div style="font-size:12px;opacity:.7">Hours Guided</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ BLOG ═══════════ -->
+<div class="page" id="page-blog">
+  <section>
+    <div class="tag">Blog & Updates</div>
+    <div class="h1">Latest Admission News</div>
+    <div class="sub">Stay updated on exam dates, cutoff changes, and career tips.</div>
+  </section>
+  <div style="padding:0 16px 60px">
+    <div class="g3">
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="height:160px;background:#ddd"></div>
+        <div style="padding:20px">
+          <div class="tag" style="margin-bottom:8px">KEAM 2025</div>
+          <h3 style="font-size:16px">KEAM 2025: Everything You Need to Know Before Applying</h3>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">A comprehensive guide to registration, document requirements, and common mistakes to avoid.</p>
+          <div class="clink" style="margin-top:12px">Read More →</div>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="height:160px;background:#eee"></div>
+        <div style="padding:20px">
+          <div class="tag" style="margin-bottom:8px">Trends</div>
+          <h3 style="font-size:16px">Top 5 Engineering Branches for the Next Decade</h3>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">Why AI and Robotics are growing, but Civil and Mechanical still hold value in specific sectors.</p>
+          <div class="clink" style="margin-top:12px">Read More →</div>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="height:160px;background:#ccc"></div>
+        <div style="padding:20px">
+          <div class="tag" style="margin-bottom:8px">Studying Abroad</div>
+          <h3 style="font-size:16px">Comparing Masters in UK vs Germany for Indian Students</h3>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">Cost, visa laws, work permits, and university rankings compared side-by-side.</p>
+          <div class="clink" style="margin-top:12px">Read More →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<div class="page" id="page-contact">
+  <section style="background:var(--navy);color:var(--white);padding-top:80px">
+    <div class="center">
+      <div class="tag" style="background:rgba(255,255,255,.1);color:var(--white)">Contact Us</div>
+      <h1 style="color:var(--white)">Book Your Free Admission Session</h1>
+      <p style="opacity:.8;max-width:600px;margin:0 auto 40px">Enter your details below. A senior counsellor will call you within 24 hours to discuss your profile and college options.</p>
+    </div>
+    <div class="contact-box">
+      <div class="fg">
+        <div><label>Full Name *</label><input type="text" placeholder="Your Name"></div>
+        <div><label>Phone Number *</label><input type="tel" placeholder="+91 00000 00000"></div>
+        <div><label>Email Address</label><input type="email" placeholder="email@example.com"></div>
+        <div><label>Current Location *</label><input type="text" placeholder="City, State"></div>
+        <div><label>Current Education *</label><select><option>Class 12 (Ongoing)</option><option>Class 12 (Completed)</option><option>Undergraduate</option><option>Graduate / Working</option></select></div>
+        <div><label>Interested In *</label><select><option>Engineering</option><option>Medical / NEET</option><option>Study Abroad</option><option>Management / MBA</option><option>Arts & Science</option><option>Law</option></select></div>
+      </div>
+      <div style="margin-top:20px"><label>Message / Questions (Optional)</label><textarea placeholder="Tell us about your goals or specific colleges you are interested in..."></textarea></div>
+      <button class="btn btn-primary" style="margin-top:24px;width:100%;border:none;font-size:16px;padding:14px">Submit & Book Free Session</button>
+      <p style="text-align:center;font-size:12px;opacity:.6;margin-top:16px">By submitting, you agree to be contacted by Zaptockz counsellors regarding admission services.</p>
+    </div>
+  </section>
+  <section>
+      <div class="g2" style="gap:40px">
+          <div>
+              <h3>Visit Our Office</h3>
+              <p style="color:var(--muted);margin-top:12px">Our main counseling hub is located in Kerala, with associate partners across Tamil Nadu and Karnataka.</p>
+              <div style="margin-top:24px">
+                  <p><b>Address:</b><br>Zaptockz Admissions Hub<br>Calicut, Kerala - 673001</p>
+                  <p style="margin-top:16px"><b>Phone:</b> +91 90000 00000</p>
+                  <p style="margin-top:4px"><b>Email:</b> hello@zaptockz.com</p>
+              </div>
+          </div>
+          <div style="background:#eee;border-radius:var(--radius);min-height:200px;display:flex;align-items:center;justify-content:center;color:var(--muted)">[Map Integration Placeholder]</div>
+      </div>
+  </section>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="nav-inner" style="flex-wrap:wrap;height:auto;padding:60px 16px">
+    <div style="flex:2;min-width:250px;margin-bottom:40px">
+      <div class="logo" style="margin-bottom:16px">Zap<span>tockz</span></div>
+      <p style="opacity:.7;font-size:14px;max-width:300px;line-height:1.6">Empowering students to find the right college through expert counseling, transparent data, and smart admission tools. Founded in 2024.</p>
+    </div>
+    <div style="flex:1;min-width:150px;margin-bottom:40px">
+      <h4 style="margin-bottom:20px;font-size:14px;text-transform:uppercase;letter-spacing:1px">Sections</h4>
+      <div style="display:grid;gap:10px;font-size:14px;opacity:.7">
+        <a onclick="go('home')" style="cursor:pointer">Home</a>
+        <a onclick="go('colleges')" style="cursor:pointer">College Directory</a>
+        <a onclick="go('services')" style="cursor:pointer">Admission Services</a>
+        <a onclick="go('abroad')" style="cursor:pointer">Study Abroad</a>
+        <a onclick="go('tools')" style="cursor:pointer">Smart Tools</a>
+      </div>
+    </div>
+    <div style="flex:1;min-width:150px;margin-bottom:40px">
+      <h4 style="margin-bottom:20px;font-size:14px;text-transform:uppercase;letter-spacing:1px">Legal</h4>
+      <div style="display:grid;gap:10px;font-size:14px;opacity:.7">
+        <a>Terms of Service</a>
+        <a>Privacy Policy</a>
+        <a>Refund Policy</a>
+        <a>Cookie Policy</a>
+      </div>
+    </div>
+    <div style="flex:1;min-width:150px;margin-bottom:40px">
+      <h4 style="margin-bottom:20px;font-size:14px;text-transform:uppercase;letter-spacing:1px">Connect</h4>
+      <div style="display:grid;gap:10px;font-size:14px;opacity:.7">
+        <a>Instagram</a>
+        <a>LinkedIn</a>
+        <a>WhatsApp Channel</a>
+        <a>YouTube</a>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;padding:24px 16px;border-top:1px solid rgba(255,255,255,.05);font-size:12px;opacity:.5">
+    © 2024 Zaptockz Admission Platform. All rights reserved.
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){const d=document.getElementById('drawer'),h=document.getElementById('hbg');d.classList.toggle('open');h.classList.toggle('open')}
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-desktop a').forEach(a=>a.classList.remove('active'));
+  const target=document.getElementById('page-'+id);
+  if(target){
+    target.classList.add('active');
+    const navLink=document.getElementById('nd-'+id);
+    if(navLink)navLink.classList.add('active');
+    window.scrollTo(0,0);
+  }
+  const d=document.getElementById('drawer'),h=document.getElementById('hbg');
+  d.classList.remove('open');h.classList.remove('open');
+}
+// Logo click
+document.getElementById('logo-home').onclick=()=>go('home');
+</script>
+</body>
+</html>

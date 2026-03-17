@@ -1,0 +1,111 @@
+import React from 'react'
+
+const Hero = ({ onCtaClick, onExploreClick }) => (
+  <div className="hero">
+    <h1>Your Right College Is Out There.<br /><span>We'll Help You Find It.</span></h1>
+    <p>India's emerging admission platform — expert counselling, smart tools, and end-to-end support so your Class 12 decision is confident, not confusing.</p>
+    <div className="hero-btns">
+      <button className="btn btn-primary" onClick={onCtaClick}>Start Free Counselling</button>
+      <button className="btn btn-outline" onClick={onExploreClick}>Explore Colleges</button>
+    </div>
+    <div className="trust-strip">
+      <div className="trust-item"><div className="tdot"></div>200+ students guided</div>
+      <div className="trust-item"><div class="tdot"></div>Kerala · Tamil Nadu · Karnataka</div>
+      <div className="trust-item"><div class="tdot"></div>Free first session</div>
+    </div>
+  </div>
+)
+
+const Stats = () => (
+  <div className="stats-row">
+    <div className="stat"><div className="stat-n">200+</div><div className="stat-l">Students Guided</div></div>
+    <div className="stat"><div className="stat-n">3</div><div className="stat-l">States Active</div></div>
+    <div className="stat"><div className="stat-n">6</div><div className="stat-l">Services Live</div></div>
+    <div className="stat"><div className="stat-n">2024</div><div className="stat-l">Founded</div></div>
+  </div>
+)
+
+const ProblemSection = () => (
+  <section style={{ background: 'var(--light)' }}>
+    <div className="center">
+      <div className="tag">The Problem</div>
+      <div className="h2">Choosing a College Shouldn't Feel This Hard</div>
+      <div className="sub">After Class 12, most students navigate one of life's biggest decisions with incomplete information and no real support.</div>
+    </div>
+    <div className="g3">
+      <div className="card"><div className="ci">🎯</div><h3>Wrong College Choices</h3><p>Students apply to institutions that don't match their profile — and lose seats they deserved elsewhere.</p></div>
+      <div className="card"><div className="ci">⏰</div><h3>Missed Deadlines</h3><p>With dozens of exam and counselling dates, important rounds get missed with no one tracking them.</p></div>
+      <div className="card"><div className="ci">💸</div><h3>Overpaying for Less</h3><p>Families pay inflated fees to consultants who disappear after taking money with nothing to show.</p></div>
+    </div>
+  </section>
+)
+
+const ProcessSteps = ({ onStartClick }) => (
+  <section>
+    <div className="center">
+      <div className="tag">How It Works</div>
+      <div className="h2">Your Admission Journey, Step by Step</div>
+    </div>
+    <div className="steps">
+      <div className="step"><div className="step-n">1</div><h3>Understand Your Profile</h3><p>Share your marks, interests, and goals. Our counsellors map out the right courses and colleges for you.</p></div>
+      <div className="step"><div className="step-n">2</div><h3>Explore Your Options</h3><p>Use our smart tools to compare colleges, check cutoffs, and shortlist the best-fit institutions across India.</p></div>
+      <div className="step"><div className="step-n">3</div><h3>Apply with Confidence</h3><p>We handle paperwork, track deadlines, and guide you through every form — nothing falls through the cracks.</p></div>
+      <div className="step"><div className="step-n">4</div><h3>Secure Your Seat</h3><p>From scholarship matching to loan assistance, we stay with you until you're enrolled and settled.</p></div>
+    </div>
+    <div style={{ textAlign: 'center', marginTop: '28px' }}>
+      <button className="btn btn-primary" onClick={onStartClick}>Begin Your Journey</button>
+    </div>
+  </section>
+)
+
+const ServicesOverview = ({ onLearnMore }) => (
+  <section style={{ background: 'var(--light)' }}>
+    <div className="center"><div className="tag">Services</div><div className="h2">Everything You Need, Under One Platform</div></div>
+    <div className="g3">
+      <div className="card"><div className="ci">🎓</div><h3>College Admissions</h3><p>End-to-end support across India — from shortlisting to enrollment.</p><div className="clink" onClick={onLearnMore}>Learn more →</div></div>
+      <div className="card"><div className="ci">🧭</div><h3>Student Counselling</h3><p>Personalised guidance based on your profile, interests, and goals.</p><div className="clink" onClick={onLearnMore}>Learn more →</div></div>
+      <div className="card"><div className="ci">💰</div><h3>Scholarship Matching</h3><p>Find funding you actually qualify for — automatically matched.</p><div className="clink" onClick={onLearnMore}>Learn more →</div></div>
+      <div className="card"><div className="ci">🏦</div><h3>Bank Loan Assistance</h3><p>Education finance made simple, from eligibility to disbursement.</p><div className="clink" onClick={onLearnMore}>Learn more →</div></div>
+      <div className="card"><div className="ci">💻</div><h3>Online Degrees</h3><p>Flexible, UGC-recognised degrees through verified university partners.</p><div className="clink" onClick={onLearnMore}>Learn more →</div></div>
+      <div className="card"><div className="ci">📚</div><h3>Plus Two Programs</h3><p>Certified 10+2 completion through verified partner institutions.</p><div className="clink" onClick={onLearnMore}>Learn more →</div></div>
+    </div>
+  </section>
+)
+
+const Testimonials = () => (
+  <section>
+    <div className="center"><div className="tag">Student Stories</div><div className="h2">Students Who Found Their Path</div></div>
+    <div className="g3">
+      <div className="tcard"><div className="stars">★★★★★</div><p className="ttext">"I had no idea which engineering college to target after KEAM. The counsellor mapped out my options in one session and helped me apply before I knew the deadline was close."</p><div className="tauthor">Arjun M.</div><div className="trole">B.Tech Student, Kerala</div></div>
+      <div className="tcard"><div className="stars">★★★★★</div><p className="ttext">"Getting a scholarship felt impossible until Zaptockz matched me with two I actually qualified for. One covered my entire first year."</p><div className="tauthor">Sneha R.</div><div className="trole">BCA Student, Tamil Nadu</div></div>
+      <div className="tcard"><div className="stars">★★★★★</div><p className="ttext">"The application tracker kept me calm throughout. I always knew what was pending and what was done — no last-minute surprises."</p><div className="tauthor">Rahul K.</div><div className="trole">B.Com Student, Karnataka</div></div>
+    </div>
+  </section>
+)
+
+const CtaBanner = ({ onCtaClick, onPricingClick }) => (
+  <div className="cta-banner">
+    <h2>Your Future Starts with One Decision. Make It the Right One.</h2>
+    <p>Book a free counselling session — no pressure, no confusion.</p>
+    <div className="cta-btns">
+      <button className="btn btn-primary" onClick={onCtaClick}>Book My Free Session</button>
+      <button className="btn btn-outline" onClick={onPricingClick}>View Pricing</button>
+    </div>
+  </div>
+)
+
+const HomePage = ({ onNavigate }) => {
+  return (
+    <div className="page active">
+      <Hero onCtaClick={() => onNavigate('contact')} onExploreClick={() => onNavigate('colleges')} />
+      <Stats />
+      <ProblemSection />
+      <ProcessSteps onStartClick={() => onNavigate('contact')} />
+      <ServicesOverview onLearnMore={() => onNavigate('services')} />
+      <Testimonials />
+      <CtaBanner onCtaClick={() => onNavigate('contact')} onPricingClick={() => onNavigate('pricing')} />
+    </div>
+  )
+}
+
+export default HomePage
