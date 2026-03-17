@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
 
 // Importing Pages
@@ -53,7 +53,7 @@ function App() {
 
       <nav>
         <div className="nav-inner">
-          <div className="logo" onClick={() => go('home')}>Zap<span>tockz</span></div>
+          <div className="logo" onClick={() => go('home')}><img src="/logo.png" alt="Zaptockz Logo" /></div>
           <div className="nav-desktop">
             <a className={currentPage === 'home' ? 'active' : ''} onClick={() => go('home')}>Home</a>
             <a className={currentPage === 'colleges' ? 'active' : ''} onClick={() => go('colleges')}>Colleges</a>
@@ -94,7 +94,7 @@ function App() {
       <footer>
         <div className="nav-inner" style={{ flexWrap: 'wrap', height: 'auto', padding: '60px 16px', display: 'flex', justifyContent: 'space-between' }}>
           <div style={{ flex: 2, minWidth: '250px', marginBottom: '40px' }}>
-            <div className="logo" style={{ marginBottom: '16px' }}>Zap<span>tockz</span></div>
+            <div className="logo" style={{ marginBottom: '16px' }}><img src="/logo.png" alt="Zaptockz Logo" /></div>
             <p style={{ opacity: 0.7, fontSize: '14px', maxWidth: '300px', lineHeight: 1.6 }}>Empowering students to find the right college through expert counseling, transparent data, and smart admission tools. Founded in 2024.</p>
           </div>
           <div style={{ flex: 1, minWidth: '150px', marginBottom: '40px' }}>
