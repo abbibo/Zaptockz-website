@@ -4,12 +4,6 @@ import './App.css'
 // Importing Pages
 import HomePage from './pages/HomePage'
 import CollegesPage from './pages/CollegesPage'
-import ServicesPage from './pages/ServicesPage'
-import AbroadPage from './pages/AbroadPage'
-import CareerPage from './pages/CareerPage'
-import ToolsPage from './pages/ToolsPage'
-import PricingPage from './pages/PricingPage'
-import AgenciesPage from './pages/AgenciesPage'
 import AboutPage from './pages/AboutPage'
 import BlogPage from './pages/BlogPage'
 import ContactPage from './pages/ContactPage'
@@ -32,12 +26,6 @@ function App() {
     switch (currentPage) {
       case 'home': return <HomePage onNavigate={go} />;
       case 'colleges': return <CollegesPage />;
-      case 'services': return <ServicesPage />;
-      case 'abroad': return <AbroadPage />;
-      case 'career': return <CareerPage />;
-      case 'tools': return <ToolsPage />;
-      case 'pricing': return <PricingPage />;
-      case 'agencies': return <AgenciesPage />;
       case 'about': return <AboutPage />;
       case 'blog': return <BlogPage />;
       case 'contact': return <ContactPage />;
@@ -57,12 +45,6 @@ function App() {
           <div className="nav-desktop">
             <a className={currentPage === 'home' ? 'active' : ''} onClick={() => go('home')}>Home</a>
             <a className={currentPage === 'colleges' ? 'active' : ''} onClick={() => go('colleges')}>Colleges</a>
-            <a className={currentPage === 'services' ? 'active' : ''} onClick={() => go('services')}>Services</a>
-            <a className={currentPage === 'abroad' ? 'active' : ''} onClick={() => go('abroad')}>Study Abroad</a>
-            <a className={currentPage === 'career' ? 'active' : ''} onClick={() => go('career')}>Career</a>
-            <a className={currentPage === 'tools' ? 'active' : ''} onClick={() => go('tools')}>Tools</a>
-            <a className={currentPage === 'pricing' ? 'active' : ''} onClick={() => go('pricing')}>Pricing</a>
-            <a className={currentPage === 'agencies' ? 'active' : ''} onClick={() => go('agencies')}>Agencies</a>
             <a className={currentPage === 'about' ? 'active' : ''} onClick={() => go('about')}>About</a>
             <a className={currentPage === 'blog' ? 'active' : ''} onClick={() => go('blog')}>Blog</a>
             <a onClick={() => go('contact')} className="nav-cta">Free Session</a>
@@ -76,12 +58,6 @@ function App() {
       <div className={`drawer ${isDrawerOpen ? 'open' : ''}`}>
         <a onClick={() => go('home')}>Home</a>
         <a onClick={() => go('colleges')}>Colleges</a>
-        <a onClick={() => go('services')}>Services</a>
-        <a onClick={() => go('abroad')}>Study Abroad</a>
-        <a onClick={() => go('career')}>Career Guidance</a>
-        <a onClick={() => go('tools')}>Tools & Platform</a>
-        <a onClick={() => go('pricing')}>Pricing</a>
-        <a onClick={() => go('agencies')}>For Agencies</a>
         <a onClick={() => go('about')}>About Us</a>
         <a onClick={() => go('blog')}>Blog</a>
         <a className="drawer-cta" onClick={() => go('contact')}>Book Free Session</a>
@@ -98,13 +74,13 @@ function App() {
             <p style={{ opacity: 0.7, fontSize: '14px', maxWidth: '300px', lineHeight: 1.6 }}>Empowering students to find the right college through expert counseling, transparent data, and smart admission tools. Founded in 2024.</p>
           </div>
           <div style={{ flex: 1, minWidth: '150px', marginBottom: '40px' }}>
-            <h4 style={{ marginBottom: '20px', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px' }}>Sections</h4>
+            <h4 style={{ marginBottom: '20px', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px' }}>Quick Links</h4>
             <div style={{ display: 'grid', gap: '10px', fontSize: '14px', opacity: 0.7 }}>
               <a onClick={() => go('home')} style={{ cursor: 'pointer' }}>Home</a>
               <a onClick={() => go('colleges')} style={{ cursor: 'pointer' }}>College Directory</a>
-              <a onClick={() => go('services')} style={{ cursor: 'pointer' }}>Admission Services</a>
-              <a onClick={() => go('abroad')} style={{ cursor: 'pointer' }}>Study Abroad</a>
-              <a onClick={() => go('tools')} style={{ cursor: 'pointer' }}>Smart Tools</a>
+              <a onClick={() => go('about')} style={{ cursor: 'pointer' }}>About Us</a>
+              <a onClick={() => go('blog')} style={{ cursor: 'pointer' }}>Blog</a>
+              <a onClick={() => go('contact')} style={{ cursor: 'pointer' }}>Contact Us</a>
             </div>
           </div>
           <div style={{ flex: 1, minWidth: '150px', marginBottom: '40px' }}>
