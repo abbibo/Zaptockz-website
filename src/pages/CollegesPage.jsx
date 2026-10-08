@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import Icon from '../components/Icon'
 
 const CollegeCard = ({ logo, name, location, type, tags, fee }) => (
-  <div className="ccard">
+  <div className="ccard reveal">
     <div className="chead">
       <div className="clogo">{logo}</div>
       <div className={`cbadge ${type === 'Government' ? 'bg-govt' : type === 'Private' ? 'bg-pvt' : 'bg-deemed'}`}>
@@ -9,7 +10,7 @@ const CollegeCard = ({ logo, name, location, type, tags, fee }) => (
       </div>
     </div>
     <div className="cname">{name}</div>
-    <div className="cloc">📍 {location}</div>
+    <div className="cloc"><Icon name="pin" size={15} />{location}</div>
     <div className="ctags">
       {tags.map((tag, i) => (
         <span key={i} className="ctag">{tag}</span>
@@ -48,17 +49,17 @@ const CollegesPage = () => {
   return (
     <div className="page active">
       <section>
-        <div className="center">
+        <div className="center reveal">
           <div className="tag">Directory</div>
           <div className="h2">India's Top Engineering Colleges</div>
           <div className="sub">Explore verified data, seat availability, and placement stats to make your shortlist.</div>
         </div>
 
-        <div className="filter-bar">
+        <div className="filter-bar reveal">
           <input 
             type="text" 
+            className="filter-search" 
             placeholder="Search by college or city..." 
-            style={{ gridColumn: 'span 2' }}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -73,17 +74,17 @@ const CollegesPage = () => {
         </div>
 
         <div className="coll-grid">
-          {filtered.map((college, i) => (
-            <CollegeCard key={i} {...college} />
+          {filtered.map((college) => (
+            <CollegeCard key={college.name} {...college} />
           ))}
         </div>
       </section>
 
-      <section style={{ background: 'var(--navy)', color: '#fff' }}>
-        <div className="center">
-          <div className="h2" style={{ color: '#fff' }}>Don't See Your College?</div>
-          <div className="sub" style={{ color: 'rgba(255,255,255,.7)' }}>Our database includes 2,000+ colleges across India beyond this list. Talk to a counsellor to find the one that fits your rank.</div>
-          <button className="btn btn-primary" style={{ marginTop: '24px' }}>Search Entire Database</button>
+      <section className="section-dark">
+        <div className="center reveal">
+          <div className="h2">Don't See Your College?</div>
+          <div className="sub">Our database includes 2,000+ colleges across India beyond this list. Talk to a counsellor to find the one that fits your rank.</div>
+          <button className="btn btn-primary">Search Entire Database</button>
         </div>
       </section>
     </div>
